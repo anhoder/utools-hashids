@@ -1,50 +1,50 @@
 {
-    "pluginName": "hashids",
-    "description": "hashids的加密及解密",
-    "main": "index.html",
-    "version": "0.1.0",
-    "author": "anhoder",
-    "homepage": "https://anhoder.github.io",
-    "logo": "hashids.png",
-    "platform": ["win32", "darwin", "linux"],
-    "features": [
+  "pluginName": "hashids",
+  "description": "hashids的加密及解密",
+  "version": "0.1.0",
+  "preload": "dist/preload.js",
+  "author": "anhoder",
+  "homepage": "https://anhoder.github.io",
+  "logo": "hash.png",
+  "platform": ["win32", "darwin", "linux"],
+  "features": [
+    {
+      "code": "add",
+      "explain": "hashids添加配置",
+      "cmds": ["hadd", "hashAdd", "hash添加配置"]
+    },
+    {
+      "code": "encode",
+      "explain": "hashids编码",
+      "cmds": [
+        "haen",
+        "hashEncode",
+        "hash编码",
         {
-            "code": "add",
-            "explain": "hashids添加配置",
-            "cmds":["hadd","hashids add"]
-        },
-        {
-            "code": "encode",
-            "explain": "hashids编码",
-            "cmds":[
-                "haen",
-                "hashids encode",
-                "hashids编码",
-                {
-                    "type": "regex",
-                    "label": "hashids编码",
-                    "match": "/^\\d+$/i",
-                    "minLength": 1
-                }
-            ]
-        },
-        {
-            "code": "decode",
-            "explain": "hashids解码",
-            "cmds":[
-                "hade",
-                "hashids decode",
-                "hashids解码",
-                {
-                    "type": "regex",
-                    "label": "hashids解码",
-                    "match": "/^[A-Za-z0-9]+$/i",
-                    "minLength": 2
-                }
-            ]
+          "type": "regex",
+          "label": "hashids编码",
+          "match": "/^\\d+$/i",
+          "minLength": 1
         }
-    ],
-    "pluginSetting": {
-        "single": true
+      ]
+    },
+    {
+      "code": "decode",
+      "explain": "hashids解码",
+      "cmds": [
+        "hade",
+        "hashDecode",
+        "hash解码",
+        {
+          "type": "regex",
+          "label": "hashids解码",
+          "match": "/^[A-Za-z0-9]+$/i",
+          "minLength": 2
+        }
+      ]
     }
+  ],
+  "pluginSetting": {
+    "single": true
+  }
 }

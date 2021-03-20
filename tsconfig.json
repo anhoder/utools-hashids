@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "sourceMap": false,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "ES2018",
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "types": [
+            "utools-helper/@types/utools"
+        ]
+    }
+}
