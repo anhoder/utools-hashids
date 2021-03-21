@@ -36,9 +36,16 @@ export class Encode implements Plugin {
 
     enter?(action?: Action<any>): void | IListItem<any> | Promise<IListItem<any>> | IListItem<any>[] | Promise<IListItem<any>[]> {
         this.items = HashDBItem.search()
-        return this.search(action.payload || "")
+
+        let word = ""
+        if (typeof action === 'object' && action.type === 'regex') {
+            word = action.payload
+        }
+
+        return this.search(word)
     }
     search?(word: string, action?: Action<any>): void | IListItem<any> | Promise<IListItem<any>> | IListItem<any>[] | Promise<IListItem<any>[]> {
+        word = word.trim()
         return this.items.map(
             (item: DBItem<Hashid>): ListItem => {
                 let hashid = <Hashid>item.data
@@ -48,7 +55,7 @@ export class Encode implements Plugin {
                     if (isNaN(<number>id)) {
                         this.hasHashid = false
                         hashid.id = undefined
-                        text = "输入整数"
+                        text = "格式有误"
                     } else {
                         this.hasHashid = true
                         hashid.id = <number>id

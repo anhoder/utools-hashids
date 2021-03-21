@@ -36,19 +36,26 @@ export class Decode implements Plugin {
 
     enter?(action?: Action<any>): void | IListItem<any> | Promise<IListItem<any>> | IListItem<any>[] | Promise<IListItem<any>[]> {
         this.items = HashDBItem.search()
-        return this.search(action.payload || "")
+        let word = ""
+        if (typeof action === 'object' && action.type === 'regex') {
+            word = action.payload
+        }
+        return this.search(word)
     }
     search?(word: string, action?: Action<any>): void | IListItem<any> | Promise<IListItem<any>> | IListItem<any>[] | Promise<IListItem<any>[]> {
+        word = word.trim()
         return this.items.map(
             (item: DBItem<Hashid>): ListItem => {
                 let hashid = <Hashid>item.data
                 let text = ""
-                if (word != "") {
+                let reg = /^[0-9a-zA-Z]+$/g;
+                if (word != "" && reg.test(word)) {
                     this.hasId = true
                     hashid.hashid = word
                     text = hashid.id.toString()
                 } else {
                     this.hasId = false
+                    text = "格式有误"
                 }
                 let res = new Item<DBItem<Hashid>>(item._id, item)
                 res.description = text + " (enter: 复制解码结果, command/ctrl + enter: 删除所选配置)"
