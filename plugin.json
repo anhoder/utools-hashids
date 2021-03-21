@@ -1,7 +1,7 @@
 {
   "pluginName": "hashids",
   "description": "hashids的加密及解密",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "preload": "dist/preload.js",
   "author": "anhoder",
   "homepage": "https://anhoder.github.io",
