@@ -5,20 +5,21 @@
   "preload": "dist/preload.js",
   "author": "anhoder",
   "homepage": "https://anhoder.github.io",
-  "logo": "hash.png",
+  "logo": "icon.png",
   "platform": ["win32", "darwin", "linux"],
   "features": [
     {
       "code": "add",
       "explain": "hashids添加配置",
-      "cmds": ["hadd", "hashAdd", "hash添加配置"]
+      "cmds": ["hadd", "hash添加配置", "hash-add"],
+      "icon": "icon.png"
     },
     {
       "code": "encode",
       "explain": "hashids编码",
       "cmds": [
         "haen",
-        "hashEncode",
+        "hash-encode",
         "hash编码",
         {
           "type": "regex",
@@ -26,14 +27,15 @@
           "match": "/^\\d+$/i",
           "minLength": 1
         }
-      ]
+      ],
+      "icon": "icon.png"
     },
     {
       "code": "decode",
       "explain": "hashids解码",
       "cmds": [
         "hade",
-        "hashDecode",
+        "hash-decode",
         "hash解码",
         {
           "type": "regex",
@@ -41,7 +43,8 @@
           "match": "/^[A-Za-z0-9]+$/i",
           "minLength": 2
         }
-      ]
+      ],
+      "icon": "icon.png"
     }
   ],
   "pluginSetting": {

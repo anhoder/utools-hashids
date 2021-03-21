@@ -7,23 +7,23 @@ export class Hashid {
     minLength: number
     private decodedId: number | bigint
     private encodedHashid: string
-    private hashids: Hashids
 
     constructor(name: string, salt: string, minLength: number) {
         this.name = name
         this.salt = salt
         this.minLength = minLength
-        this.hashids = new Hashids(salt, minLength)
     }
 
     set id(id: number | bigint) {
         this.decodedId = id
-        this.encodedHashid = this.hashids.encode(this.decodedId)
+        let hashids = new Hashids(this.salt, this.minLength)
+        this.encodedHashid = hashids.encode(this.decodedId)
     }
 
     set hashid(hashid: string) {
         this.encodedHashid = hashid
-        let result = this.hashids.decode(this.encodedHashid)
+        let hashids = new Hashids(this.salt, this.minLength)
+        let result = hashids.decode(this.encodedHashid)
         this.decodedId = result.length > 0 ? result[0] : 0
     }
 
@@ -62,7 +62,7 @@ export class HashDBItem implements DBItem<Hashid> {
         return res
     }
 
-    static search(name: string): HashDBItem[] {
+    static search(name?: string): HashDBItem[] {
         return utools.db.allDocs<Hashid>(name).map(
             (item: DBItem<Hashid>): HashDBItem => {
                 item.data = new Hashid(item.data.name, item.data.salt, item.data.minLength)
